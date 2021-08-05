@@ -57,7 +57,7 @@ struct Array {
   bool resize(size_t size) noexcept {
     if (size <= m_size) {
       if constexpr(!std::is_trivially_destructible_v<T>) {
-        if (m_size) for (size_t i = m_size - 1; i < size; i++) m_data[i].~T();
+        if (m_size) for (size_t i = m_size - 1; i > size; i++) m_data[i].~T();
       }
     } else {
       if (!ensure(size)) return false;
